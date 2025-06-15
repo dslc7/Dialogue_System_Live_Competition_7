@@ -1,0 +1,36 @@
+services:
+  remdis:
+    image: yubo0306/remdis:latest
+    init: true
+    build:
+      context: ..
+      dockerfile: docker/dockerfile
+    container_name: remdis
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    shm_size: '16gb'
+    volumes:
+      - '..:/home/ubuntu/dslc7'
+    command: tail -f /dev/null
+    tty: true
+    stdin_open: true
+    ports:
+      - "9999:9999"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    tty: true
+    stdin_open: true
+    restart: "no"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 3

@@ -1,0 +1,83 @@
+COMPETITION:
+  duration: 600 # sec
+  utterance_to_terminate: 対話時間が終了しています。お疲れ様でした。評価をよろしくお願いいたします。 # 対話終了時の発話例
+  system_first: true
+  initial_utterance: # strings or list of strings (ランダムで一つ、対話開始時に取り出される)
+    - こんにちは！なにかお話ししませんか？
+
+AIN:
+  frame_length: 0.005 # sec
+  sample_rate: 16000 # Hz
+  sample_width: 2 # Bytes
+  num_channel: 1
+  device_index: 0
+
+VIN:
+  device_index: 0
+
+ASR:
+  buff_size: 10
+  json_key: <enter your json path>
+  language: ja-JP
+  chunk_size: 20
+  sample_rate: 16000 # Hz
+
+VideoProcess:
+  buff_size: 10
+
+VAP:
+  model_filename: ../models/vap/sw2japanese_public0.ckpt
+  buffer_length: 25 # ms
+  threshold: 0.5
+
+DIALOGUE:
+  history_length: 20
+  response_generation_timeout: 3.0 # sec
+  response_generation_interval: 3
+  max_silence_time: 5.0 # sec
+  format: "{style}/{response}/{expression},{action}" # style: ttsスタイル,response: 発話テキスト,expression: 表情,action: 動きで、任意に設定可能
+
+ChatGPT:
+  api_key: <enter your API key>
+  max_tokens: 128
+  max_message_num_in_context: 20
+  response_generation_model: "gpt-4o" # "gpt-3.5-turbo", "gpt-4o-mini", "gpt-4"
+  text_vap_model: "gpt-4o-mini"
+  output_tts_style: "on" # "on" or "off"
+  prompts:
+    BC: ../prompts/text_vap.txt
+    # RESP: ../prompts/response.txt # ttsのスタイルを出力しない場合は下の行をコメントアウトし、本行のコメントを外す
+    RESP: ../prompts/response_w_tts_style.txt
+    TO: ../prompts/time_out.txt
+
+TEXT_VAP:
+  max_verbal_backchannel_num: 2
+  max_nonverbal_backchannel_num: 1
+  min_text_vap_threshold: 6
+  text_vap_interval: 3
+
+TIME_OUT:
+  max_silence_time: 5 # sec
+  max_timeout_num: 3
+  block_time: 10 # sec
+
+TTS:
+  engine_name: azure
+  model_name: tacotron2_hifipwg_jsut24k # ttslearnのモデル名
+  frame_length: 0.05 # Sec
+  send_interval: 0.04 # Sec
+  sample_rate: 16000 # Hz
+  sample_width: 2 # Bytes
+  azure: # This option is only used when "engine_name" is "azure". Otherwise, no setting is required.
+    api_key: <enter your azure API key>
+    region: <enter your azure region>
+
+AOUT:
+  frame_length: 0.05 # Sec
+  sample_rate: 16000 # Hz
+  sample_width: 2 # Bytes
+  num_channel: 1
+
+TRAVEL_VIEWER:
+  server_host: 0.0.0.0
+  server_port: 9999

@@ -1,0 +1,20 @@
+# python generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# venv
+.venv
+
+*.ckpt
+.DS_Store
+VAP/
+config/*.json
+torch_cache/
+logs/
+
+# temp
+MMDAgent-EX/

@@ -1,0 +1,7 @@
+[submodule "MMDAgent-EX/asset/models/uka"]
+	path = MMDAgent-EX/asset/models/uka
+	url = https://github.com/mmdagent-ex/uka
+    branch = humanify_ver
+[submodule "VAP"]
+	path = VAP
+    url = https://github.com/ErikEkstedt/VAP.git

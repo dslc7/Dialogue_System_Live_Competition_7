@@ -1,0 +1,13 @@
+.venv/
+dist/
+config/
+VAP/
+.git/
+.gitignore
+.gitmodules
+config/
+MMDAgent-EX/
+models/vap/*.ckpt
+torch_cache/
+modules/logs/
+**/__pycache__
