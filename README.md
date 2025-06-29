@@ -49,17 +49,6 @@ sed -i 's/\r//g' run.sh
 - Windows 以外の OS は，[MMDAgent-EX 公式サイト](https://mmdagent-ex.dev/ja/)の[入手とビルド](https://mmdagent-ex.dev/ja/docs/build/) に従って MMDAgent-EX をインストール
 - Windows はそのまま次へ（実行バイナリが同梱されているので手順不要）
 
-> [!NOTE]
-> 12/3 時点で MacOS 用のビルドの際、`brew install poco`では、MMDAgent をビルドするためのバージョンの`poco`がインストールできないことが確認されています。
-> 現在、動作確認が取れている`poco@1.13.3`をインストールするための tap を用意したため、そちらから`poco`をインストールしてください。
->
-> ```bash
-> $ brew tap yuta0306/poco
-> $ brew install yuta0306/poco/poco
-> ```
->
-> 以上の方法で、poco@1.13.3をインストールしたのち、MMDAgent-EX のビルドへ進んでください。
-
 ### Step 3. 各種 API 鍵の取得と設定
 
 - Google Speech Cloud API の API 鍵を JSON 形式で取得し，config/config.yaml の下記部分にパスを記載
