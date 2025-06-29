@@ -9,8 +9,8 @@ ${background_image}=asset/images/bg_cafe.png
 ${frame_image}=asset/images/desk_front.png
 
 0 100:
-    # load background images
-    <eps> STAGE|${background_image}
+    # load floor and background images
+    <eps> STAGE|asset/images/floor.png,${background_image}
     # add CG model
     <eps> MODEL_ADD|0|${cg_model}
     # add basic wait motion as a loop motion
