@@ -36,16 +36,8 @@ RUN apt clean
 
 WORKDIR /home/ubuntu/dslc7
 
-# Install VAP
-RUN git clone https://github.com/ErikEkstedt/VAP.git \
-    && cd VAP \
-    && pip install torch==2.0.1 torchvision torchaudio torchsummary \
-    && pip3 install -r requirements.txt \
-    && pip3 install -e .
-
 # Install python dependencies
 COPY pyproject.toml README.md /home/ubuntu/dslc7/
 RUN pip install -e .
 
 COPY . .
-RUN cd models/vap && unzip sw2japanese_public0.zip

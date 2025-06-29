@@ -6,7 +6,6 @@ VAP/
 .gitignore
 .gitmodules
 config/
-MMDAgent-EX/
 models/vap/*.ckpt
 torch_cache/
 modules/logs/

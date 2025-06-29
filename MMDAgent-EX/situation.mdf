@@ -1,0 +1,33 @@
+#
+# MMDAgent-EX content configuration
+#
+
+# default window size
+window_size=1280,720
+
+# set to true to start with full screen mode
+full_screen=false
+
+# set to true to show fps indicator
+show_fps=false
+
+# set to false to disable blooming post effect
+diffusion_postfilter=true
+
+# stage size
+stage_size=24.0,20.0,27.0
+
+# minor settings for graphic rendering
+
+display_comment_time=0.0
+bullet_fps=60
+bullet_floor=false
+diffusion_postfilter_intensity=0.6
+diffusion_postfilter_scale=1.4
+
+# enable only required plugins and disable others
+disablePlugin=ALL
+enablePlugin=AnyScript,Audio,Remote,TextArea,Variables,VIManager,RabbitMQ
+
+# RabbitMQ config file
+Plugin_RabbitMQ_ConfigFile=rabbitmq_config.json

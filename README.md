@@ -4,125 +4,61 @@
 
 対話システムライブコンペ 7 では，[Remdis](https://github.com/remdis/remdis)をベースとしたシステムを使用します．
 
-## Release Notes
+## 必要環境
 
-- 2024/10/31 `v0.0.2`の公開
-  - MacOS/Windows に対応した Docker image を配布
-  - Docker を用いるためのドキュメントを追加
-  - 本ソフトウェアの安定性向上
-  - TTS のスタイル指定機能を追加
-  - シチュエーショントラック・タスクトラックに応じた MMDAgent の実行環境を追加
-  - TravelViewer を追加
-- 2024/09/12 `v0.0.1`の公開
-  - TTS を Azure TTS へ変更
-  - 動画入力への対応
-  - Py-feat を用いた感情認識と顔向き推定
-- 2024/10/xx Docker image およびソフトウェアの配布
-
-## Remdis: Realtime Multimodal Dialogue System Toolkit とは？
-
-![git_top_remdis](https://github.com/remdis/remdis/assets/15374299/dbc9deab-54b2-4b72-9ef9-06d6fcf38240)
-
-> Remdis はテキスト・音声・マルチモーダル対話システム開発のためのプラットフォームです．
-
-### 特徴
-
-- 非同期処理に基づくモジュールベースの対話システム
-- Incremental Units (IU)を単位としたメッセージングと Incremental Modules (IM)による逐次処理
-- Large Language Model (ChatGPT)の並列実行・ストリーミング生成による疑似的な逐次応答生成
-- Voice Activity Projection (VAP)によるターンテイキング
-- MMDAgent-EX との連携によるエージェント対話
-- Python 実装，クロスプラットフォーム (Windows/MacOS/Ubuntu)
-- マルチモーダル対応 (テキスト対話/音声対話)
+- Docker
 
 ## インストール方法
 
-以下の Step.1 から Step.4 を順に行ってください．
+### Step 1. Remdis 本体のインストール
 
-**注意) Windows 環境で実施する場合，WSL はオーディオデバイスとの相性がよくないため，コマンドプロンプトの利用を推奨します．**
+#### Clone
 
-### Step 1. 事前準備
+```bash
+git clone --recursive https://github.com/p1n0k0/Dialogue_System_Live_Competition_7.git
+cd Dialogue_System_Live_Competition_7
+git submodule init
+git submodule update
+```
 
-本ソフトウェア では Docker を利用します．
+#### Docker ファイルのビルド
 
-- Docker Desktop のインストール
-  - MacOS
-    ```
-    brew install --cask docker
-    ```
-  - Ubuntu
-    - 最新の deb パッケージを DL し，インストール ([こちらのページ](https://docs.docker.jp/desktop/install/ubuntu.html)をご参照ください)
-      ```
-      sudo apt-get install ./docker-desktop-<version>-<arch>.deb
-      ```
-  - Windows
-    - [Docker docs](https://docs.docker.com/desktop/install/windows-install/)からインストーラをダウンロードし，実行
+```bash
+cd docker
 
-### Step 2. Remdis 本体のインストール
+# タスクトラックの開発者向け
+docker compose -f docker-compose.dev.yaml build
 
-- Clone
+# シチュエーショントラックの開発者向け
+docker compose -f docker-compose.prompt-only.yaml build
+```
 
-  ```bash
-  git clone --recursive https://github.com/p1n0k0/Dialogue_System_Live_Competition_7.git
-  cd Dialogue_System_Live_Competition_7
-  git submodule init
-  git submodule update
-  ```
+Windows を使用している方は追加で以下を実行してください。
 
-- Docker ファイルのビルド
+```bash
+sed -i 's/\r//g' run.sh
 
-  ```bash
-  cd docker
+# 上記コマンドが必要なのはなぜ？
+# Windowsは改行コードが\r\nですが、UbuntuなどのUNIXでは\nのため、
+# 次のようなエラーが発生しうるためです。
+# $’\r’: command not found
+```
 
-  # タスクトラックの開発者向け
-  docker compose -f docker-compose.dev.yaml build
+### Step 2. MMDAgent-EX のインストール (Windows 以外)
 
-  # シチュエーショントラックの開発者向け
-  docker compose -f docker-compose.prompt-only.yaml build
-  ```
+- Windows 以外の OS は，[MMDAgent-EX 公式サイト](https://mmdagent-ex.dev/ja/)の[入手とビルド](https://mmdagent-ex.dev/ja/docs/build/) に従って MMDAgent-EX をインストール
+- Windows はそのまま次へ（実行バイナリが同梱されているので手順不要）
 
-  Windows を使用している方は追加で以下を実行してください。
-
-  ```bash
-  sed -i 's/\r//g' run.sh
-
-  # 上記コマンドが必要なのはなぜ？
-  # Windowsは改行コードが\r\nですが、UbuntuなどのUNIXでは\nのため、
-  # 次のようなエラーが発生しうるためです。
-  # $’\r’: command not found
-  ```
-
-- 配布ソフトウェアのダウンロード
-  - Docker を用いたシステムを使用するためのソフトウェアを[https://huggingface.co/datasets/yubo0306/remdis-tools](https://huggingface.co/datasets/yubo0306/remdis-tools)よりダウンロードし、以下のように配置する
-    ```
-    Dialogue_System_Live_Competition_7
-    |- config/
-    |  |- config.yaml
-    |- dist/
-    |  |- input
-    |  |- input.exe
-    |  |- output
-    |  |- output.exe
-    |- docker/
-    |
-    ...
-    ```
-  - 上記のダウンロードは以下のコマンドで簡単に実現できる
-    ダウンロードをする前に、**必ず`git-lfs`をインストールする**
-    - MacOS向け
-      ```
-      # git-lfsのインストール
-      $ brew install git-lfs
-      ```
-    - Windows向け
-      [https://git-lfs.com/](https://git-lfs.com/)からダウンロードする
-
-    remdis-toolsのダウンロード
-    ```
-    # ダウンロード
-    cd Dialogue_System_Live_Competition_7
-    git clone https://huggingface.co/datasets/yubo0306/remdis-tools dist
-    ```
+> [!NOTE]
+> 12/3 時点で MacOS 用のビルドの際、`brew install poco`では、MMDAgent をビルドするためのバージョンの`poco`がインストールできないことが確認されています。
+> 現在、動作確認が取れている`poco@1.13.3`をインストールするための tap を用意したため、そちらから`poco`をインストールしてください。
+>
+> ```bash
+> $ brew tap yuta0306/poco
+> $ brew install yuta0306/poco/poco
+> ```
+>
+> 以上の方法で、poco@1.13.3をインストールしたのち、MMDAgent-EX のビルドへ進んでください。
 
 ### Step 3. 各種 API 鍵の取得と設定
 
@@ -145,25 +81,7 @@
     region: <enter your azure region> # <-- japaneast or japanwest
   ```
 
-### Step 4. MMDAgent-EX のインストール (Windows 以外)
-
-- Windows 以外の OS は，[MMDAgent-EX 公式サイト](https://mmdagent-ex.dev/ja/)の[入手とビルド](https://mmdagent-ex.dev/ja/docs/build/) に従って MMDAgent-EX をインストール
-- Windows はそのまま次へ（実行バイナリが同梱されているので手順不要）
-
-> [!NOTE]
-> 12/3 時点で MacOS 用のビルドの際、`brew install poco`では、MMDAgent をビルドするためのバージョンの`poco`がインストールできないことが確認されています。
-> 現在、動作確認が取れている`poco@1.13.3`をインストールするための tap を用意したため、そちらから`poco`をインストールしてください。
->
-> ```bash
-> $ brew tap yuta0306/poco
-> $ brew install yuta0306/poco/poco
-> ```
->
-> 以上の方法で、poco@1.13.3をインストールしたのち、MMDAgent-EX のビルドへ進んでください。
-
 ## 利用方法
-
-### Docker を用いて対話を行う場合
 
 ### Remdis の実行
 
@@ -171,20 +89,18 @@
 cd docker
 
 # タスクトラックの場合
-docker compose -f docker-compose.dev.yaml up -d
-docker compose -f docker-compose.dev.yaml exec remdis bash run.sh
+sh scripts/run_task.sh
 
 # シチュエーショントラックの場合
-docker compose -f docker-compose.prompt-only.yaml up -d
-docker compose -f docker-compose.prompt-only.yaml exec remdis bash run.sh
+sh scripts/run_situation.sh
 ```
 
 ### 音声/動画入力サーバの起動
 
 - Windows の場合
-  エクスプローラから`dist/input.exe`を実行
+  エクスプローラから`remdis-tools/input.exe`を実行
 - Mac の場合
-  Finder から`dist/input`を実行
+  Finder から`remdis-tools/input`を実行
 
 使用したい音声/動画の入力デバイスの番号が、環境により異なることがあります。  
 そのため、`config/config.yaml`において、環境に合わせて設定できます。以下は、0 番からそれぞれ使用するデバイス番号を 1 にする変更です。
@@ -228,25 +144,6 @@ ffmpeg version 7.0.2 Copyright (c) 2000-2024 the FFmpeg developers
 [AVFoundation indev @ 0x14e705a60] [2] Background Music (UI Sounds)
 [AVFoundation indev @ 0x14e705a60] [3] ZoomAudioDevice
 ```
-
-### MMDAgent-EX を起動せずに音声対話のみを行う場合
-
-- Windows の場合
-  エクスプローラから`dist/output.exe`を実行
-- Mac の場合
-  Finder から`dist/output`を実行
-
-### MMDAgent-EX を起動した音声対話を行う場合
-
-- Windows: `MMDAgent-EX/run.vbs` を実行
-- Windows 以外: MMDAgent-EX フォルダのファイルを指定して MMDAgent-EX を実行
-  ```sh
-  cd MMDAgent-EX
-  # タスクトラックの場合
-  /somewhere/MMDAgent-EX/Release/MMDAgent-EX task.mdf
-  # シチュエーショントラックの場合
-  /somewhere/MMDAgent-EX/Release/MMDAgent-EX situation.mdf
-  ```
 
 ### Travel Viewer を動かしてみる
 
@@ -316,39 +213,6 @@ $ pip install py-feat
   python time_out.py
   ```
 
-## 開発可能範囲
-
-### シチュエーショントラック
-
-シチュエーショントラックでは，以下の 3 ファイルについて自由に書き換えることができます．
-- `prompts/response_w_tts_style.txt`
-- `prompts/text_vap.txt`
-  - バックチャンネル（うなずきの方法）や、発話終了の判定基準を独自に制定する等の変更が取れます。例えば、a:直前のユーザ発話...1つ選択して出力してください。但し、〇〇を考慮してください。等の文を付け加えることや、相槌の種類を消す（aであれば「2はい」を消す）等の変更を行うことができます。これらにより、取る相槌や発話終了判定を行う基準や種類等が変更できることが期待できます。しかし、プログラムの関係上、a, b, c, dはそれぞれかならず出力させるようにして、出力フォーマットも変えないことが望ましいです。
-- `prompts/time_out.txt`
-  - 5秒以上ユーザが沈黙している場合の挙動を記述
-
-また，configファイルの以下のパラメータにおいて変更可能です．
-- initial_utterance
-  - ランダムで一つ、システムの対話開始時に取り出される発話（["発話1", "発話2", ...]で複数指定可能）
-- utterance_to_terminate
-  - システム終了時の発話（1つのみ）
-- history_length
-  - 保持する対話履歴のターン数
-- max_tokens
-  - システムの1発話における最大出力トークン数
-- response_generation_interval
-  - 逐次的に行われる音声認識から送られる部分的な発話に対し、何回毎にプログラム中で応答を生成するかを指定するしきい値
-
-対話戦略へ焦点を当てた評価を実施するために，その他の部分については全チームで共通とさせていただきます．
-
-### タスクトラック
-
-タスクトラックでは，以下の 3 点を遵守していれば，他の部分は自由に開発いただけます．
-
-- 音声合成に Azure API の `ja-JP-NanamiNeural` を用いること
-- 指定のソフトウェア(MMDAgent-EX)において、指定の設定（[`task.mdf`](MMDAgent-EX/task.mdf), CG アバター・背景・各画像の配置等を指定）で表示・動作させる
-- 指定の画像・地図表示システム([Travel Viewer](https://dslc7.github.io/travel-viewer/))を使用すること
-
 ## 開発時の参考情報
 
 ### 入力情報・形式
@@ -368,11 +232,6 @@ $ pip install py-feat
 TTS の出力スタイルを発話にあわせて chat・cheerful・customerservice の 3 つからプロンプトを用いて動的に変更することができます．TTS のスタイルを変更したい場合は config/config.yaml の ChatGPT 内の output_tts_style を on に、prompts 内の RESP を prompt/response_w_tts_style.txt に変更してください．
 
 ## ライセンス
-
-### ソースコードの利用規約
-
-本リポジトリに含まれるオリジナルのソースコードは，ライブコンペ 7 にエントリし，本リポジトリへのアクセス権を付与された代表者およびその共同開発者が，ライブコンペ 7 のシステムを開発する際のみにご利用いただけるものとし，利用者以外の第三者に提供、販売、貸与、譲渡、再配布する行為を禁じます．
-加えて，他のライセンスがすでに付与されているファイルはそのライセンスにも注意を払ってご利用ください．
 
 ### 外部パッケージの利用規約
 

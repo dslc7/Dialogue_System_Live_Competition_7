@@ -15,6 +15,3 @@ VAP/
 config/*.json
 torch_cache/
 logs/
-
-# temp
-MMDAgent-EX/
