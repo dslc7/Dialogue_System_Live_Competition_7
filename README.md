@@ -265,3 +265,27 @@ TTS の出力スタイルを発話にあわせて chat・cheerful・customerserv
   year={2024},
 }
 ```
+
+### 対話システムライブコンペティション 7
+
+**シチュエーショントラック**
+
+```
+@inproceedings{livecompe-situation2025sigdial,
+  title={Analyzing Dialogue System Behavior in a Specific Situation Requiring Interpersonal Consideration},
+  author={Takahashi, Tetsuro and Kikuchi, Hirofumi and Yang,Jie and Nishikawa, Hiroyuki and Komuro, Masato and Makino, Ryosaku and Sato, Shiki and Sasaki, Yuta and Iwata, Shinji and Hentona, Asahi and Yamazaki, Takato and Moriya, Shoji and Ohagi, Masaya and Qi, Zhiyang and Kodama, Takashi and Lee, Akinobu and Minato, Takashi and Sakai, Kurima and Funayama, Tomo and Funakoshi, Kotaro and Usami, Mayumi and Inaba,Michimasa and Higashinaka, Ryuichiro},
+  booktitle={Proceedings of the 26th Annual Meeting of the Special Interest Group on Discourse and Dialogue},
+  year={2025},
+}
+```
+
+**タスクトラック**
+
+```
+@inproceedings{livecompe-task2025sigdial,
+  title={Key Challenges in Multimodal Task-Oriented Dialogue Systems: Insights from a Large Competition-Based Dataset},
+  author={Sato, Shiki and Iwata, Shinji and Hentona, Asahi and Sasaki, Yuta and Yamazaki, Takato and Moriya, Shoji and Ohagi, Masaya and Kikuchi, Hirofumi and Yang, Jie and Qi, Zhiyang and Kodama, Takashi and Lee, Akinobu and Komuro, Masato and Nishikawa, Hiroyuki and Makino, Ryosaku and Minato, Takashi and Sakai, Kurima and Funayama, Tomo and Funakoshi, Kotaro and Usami, Mayumi and Inaba, Michimasa and Takahashi, Tetsuro and Higashinaka, Ryuichiro},
+  booktitle={Proceedings of the 26th Annual Meeting of the Special Interest Group on Discourse and Dialogue},
+  year={2025},
+}
+```
