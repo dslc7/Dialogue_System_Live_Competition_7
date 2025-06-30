@@ -12,6 +12,9 @@
 
 ### Step 1. Remdis 本体のインストール
 
+> [!NOTE]
+> 本リポジトリでは Git lfs を使用します。未インストールの方はこちらの[リンク](https://docs.github.com/ja/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)等を参考に Git lfs をインストールしてください。
+
 #### Clone
 
 ```bash
