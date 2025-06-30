@@ -180,20 +180,6 @@ $ pip install py-feat
   python output.py
   ```
 
-### Audio VAP の出力を可視化したい
-
-- draw_vap_result.py を実行
-  ```
-  # 音声対話の例
-  python input.py
-  python audio_vap.py
-  python asr.py
-  python dialogue.py
-  python tts.py
-  python output.py
-  python draw_vap_result.py
-  ```
-
 ### 一定時間が経過したらシステム側から話しかけるようにしたい
 
 - time_out.py を実行
@@ -227,7 +213,7 @@ TTS の出力スタイルを発話にあわせて chat・cheerful・customerserv
 
 ### 外部パッケージの利用規約
 
-本ソフトウェアでは，音声認識に[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ja)，音声合成に[Azure Text-to-Speech](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech)，対話生成に[OpenAI API](https://openai.com/blog/openai-api)，ターンテイキングに[VAP](https://github.com/ErikEkstedt/VAP.git)，顔画像処理に[Py-feat](https://github.com/cosanlab/py-feat)及び[Py-feat 内のモデル](https://github.com/cosanlab/py-feat?tab=License-1-ov-file)といった外部パッケージを利用します．
+本ソフトウェアでは，音声認識に[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ja)，音声合成に[Azure Text-to-Speech](https://learn.microsoft.com/en-us/azure/ai-services/speech-service/text-to-speech)，対話生成に[OpenAI API](https://openai.com/blog/openai-api)，顔画像処理に[Py-feat](https://github.com/cosanlab/py-feat)及び[Py-feat 内のモデル](https://github.com/cosanlab/py-feat?tab=License-1-ov-file)といった外部パッケージを利用します．
 ライセンスに関してはそれぞれのパッケージの利用規約をご参照ください．
 
 ## References
@@ -251,18 +237,6 @@ TTS の出力スタイルを発話にあわせて chat・cheerful・customerserv
   booktitle={人工知能学会 言語・音声理解と対話処理研究会（第99回）},
   pages={25--30},
   year={2023},
-}
-```
-
-### Audio VAP
-
-```
-@inproceedings{vap-sato2024slud,
-  title={複数の日本語データセットによる音声活動予測モデルの学習とその評価},
-  author={佐藤友紀 and 千葉祐弥 and 東中竜一郎},
-  booktitle={人工知能学会 言語・音声理解と対話処理研究会（第100回）},
-  pages={192--197},
-  year={2024},
 }
 ```
 
