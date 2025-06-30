@@ -10,6 +10,7 @@ ${frame_image1}=asset/images/desk_front.png
 ${frame_image2}=asset/images/pc.png
 
 0 100:
+    <eps> STAGE|asset/images/floor.png,${background_image}
     # add CG model
     <eps> MODEL_ADD|0|${cg_model}|5.8,0,0|0,-7,0
     # add basic wait motion as a loop motion
