@@ -10,6 +10,8 @@
 
 ## インストール方法
 
+（[こちらの資料](https://docs.google.com/presentation/d/1gGTtOQWmxKTmvMKPr-OpOFLWZ971ZF3AqEmE_eh6X9c/edit?usp=sharing)でもインストール方法をご案内しております。）
+
 ### Step 1. Remdis 本体のインストール
 
 > [!NOTE]
